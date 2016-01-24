@@ -58,15 +58,12 @@ namespace Lok
 
         public void OnLocationChanged(Location location)
         {
-            if (location != null)
-            {
-                Log.Error(TAG, "Posisi :" + location.Altitude + ", " + location.Longitude + ", akurasi : " + location.Accuracy);
+            if (location == null) return;
+            Log.Error(TAG, "Posisi :" + location.Altitude + ", " + location.Longitude + ", akurasi : " + location.Accuracy);
 
-                if (location.Accuracy < 500.0f)
-                {
-                    StopLocationUpdates();
-                }
-            }
+            if (!(location.Accuracy < 500.0f)) return;
+            StopLocationUpdates();
+            SendLocationDataToWebsite(location);
         }
 
         protected void SendLocationDataToWebsite(Location location)
