@@ -1,15 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-
 using Android.Gms.Location;
 using Android.Gms.Common;
 using Android.Gms.Common.Apis;
@@ -18,8 +9,6 @@ using Android.Util;
 using Java.Text;
 using Java.Util;
 using ILocationListener = Android.Gms.Location.ILocationListener;
-
-// using Android.Gms.Location;
 
 namespace Lok
 {
@@ -85,6 +74,29 @@ namespace Lok
             var dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             var date = new Date(location.Time);
             var prefs = this.GetSharedPreferences("Lok", 0);
+            var editor = prefs.Edit();
+            var totalDistance = prefs.GetFloat("totalDistance", 0f);
+            var firstTimePosition = prefs.GetBoolean("firstTimePosition", true);
+            if (firstTimePosition)
+                editor.PutBoolean("firstTimePosition", false);
+            else
+            {
+                var prevLocation = new Location("")
+                {
+                    Latitude = prefs.GetFloat("prevLat", 0f),
+                    Longitude = prefs.GetFloat("prevLong", 0f)
+                };
+
+                var distance = location.DistanceTo(prevLocation);
+                totalDistance += distance;
+                editor.PutFloat("totalDistance", totalDistance);
+            }
+            editor.PutFloat("prevLat", (float) location.Latitude);
+            editor.PutFloat("prevLong", (float) location.Longitude);
+            editor.Apply();
+
+            // TO DO : add parameters for post requests.
+            // Hint : using HttpClient();
         }
     }
 }

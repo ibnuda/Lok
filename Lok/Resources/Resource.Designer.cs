@@ -1587,8 +1587,14 @@ namespace Lok
 			// aapt resource value: 0x7f02005f
 			public const int Icon = 2130837599;
 			
+			// aapt resource value: 0x7f020062
+			public const int notification_template_icon_bg = 2130837602;
+			
 			// aapt resource value: 0x7f020060
-			public const int notification_template_icon_bg = 2130837600;
+			public const int powered_by_google_dark = 2130837600;
+			
+			// aapt resource value: 0x7f020061
+			public const int powered_by_google_light = 2130837601;
 			
 			static Drawable()
 			{
