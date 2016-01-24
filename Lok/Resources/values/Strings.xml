@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="Hello">Hello World, Click Me!</string>
+    <string name="ApplicationName">Lok</string>
+    <string name="DefaultUploadSite">http://to.be.added</string>
+    <string name="TrackingOn">Tracking On</string>
+    <string name="TrackingOff">Tracking Off</string>
+    <string name="OneMinute">Satu Menit</string>
+    <string name="ThreeMinute">Tiga Menit</string>
+    <string name="FiveMinute">Lima Menit</string>
+    <string name="GooglePlayUnavailable">Google Play Tidak Tersedia</string>
+</resources>

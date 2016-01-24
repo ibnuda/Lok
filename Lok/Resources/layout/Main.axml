@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:p1="http://schemas.android.com/apk/res/android"
+    p1:orientation="vertical"
+    p1:layout_width="match_parent"
+    p1:layout_height="match_parent"
+    p1:id="@+id/linearLayout1">
+    <TextView
+        p1:text="Username"
+        p1:textAppearance="?android:attr/textAppearanceMedium"
+        p1:layout_width="match_parent"
+        p1:layout_height="wrap_content"
+        p1:id="@+id/textViewUserName"
+        p1:paddingTop="80px" />
+    <EditText
+        p1:layout_width="match_parent"
+        p1:layout_height="wrap_content"
+        p1:id="@+id/editTextUsername"
+        p1:hint="Username" />
+    <TextView
+        p1:text="Upload Site"
+        p1:textAppearance="?android:attr/textAppearanceMedium"
+        p1:layout_width="match_parent"
+        p1:layout_height="wrap_content"
+        p1:id="@+id/textViewUploadSite" />
+    <EditText
+        p1:layout_width="match_parent"
+        p1:layout_height="wrap_content"
+        p1:id="@+id/editTextUploadWebsite"
+        p1:hint="http://to.be.added" />
+    <TextView
+        p1:text="Interval Update"
+        p1:textAppearance="?android:attr/textAppearanceMedium"
+        p1:layout_width="match_parent"
+        p1:layout_height="wrap_content"
+        p1:id="@+id/textViewInterval"
+        p1:paddingTop="80px" />
+    <RadioGroup
+        p1:minWidth="25px"
+        p1:minHeight="25px"
+        p1:layout_width="match_parent"
+        p1:layout_height="wrap_content"
+        p1:id="@+id/radioGroup1">
+        <RadioButton
+            p1:layout_width="wrap_content"
+            p1:layout_height="wrap_content"
+            p1:checked="true"
+            p1:text="1 Menit"
+            p1:id="@+id/radioButton1Minute" />
+        <RadioButton
+            p1:layout_width="wrap_content"
+            p1:layout_height="wrap_content"
+            p1:text="3 Menit"
+            p1:id="@+id/radioButton3Minute" />
+        <RadioButton
+            p1:layout_width="wrap_content"
+            p1:layout_height="wrap_content"
+            p1:text="5 Menit"
+            p1:id="@+id/radioButton5Minute" />
+    </RadioGroup>
+    <Button
+        p1:text="@string/TrackingOff"
+        p1:layout_width="match_parent"
+        p1:layout_height="wrap_content"
+        p1:id="@+id/buttonTracking" />
+</LinearLayout>
