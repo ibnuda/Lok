@@ -129,6 +129,17 @@
   <Choose>
     <When Condition="$(TargetFrameworkIdentifier) == 'MonoAndroid'">
       <ItemGroup>
+        <Reference Include="Xamarin.GooglePlayServices.Location">
+          <HintPath>..\packages\Xamarin.GooglePlayServices.Location\lib\MonoAndroid41\Xamarin.GooglePlayServices.Location.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == 'MonoAndroid'">
+      <ItemGroup>
         <Reference Include="Xamarin.GooglePlayServices.Maps">
           <HintPath>..\packages\Xamarin.GooglePlayServices.Maps\lib\MonoAndroid41\Xamarin.GooglePlayServices.Maps.dll</HintPath>
           <Private>True</Private>

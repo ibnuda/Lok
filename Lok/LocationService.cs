@@ -10,19 +10,25 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 
+using Android.Gms.Location;
 using Android.Gms.Common;
 using Android.Gms.Common.Apis;
 using Android.Locations;
+using ILocationListener = Android.Gms.Location.ILocationListener;
 
 // using Android.Gms.Location;
 
 namespace Lok
 {
-    public class LocationService : Service, GoogleApiClient.IConnectionCallbacks, GoogleApiClient.IOnConnectionFailedListener, ILocationListener
+    public class LocationService : Service, GoogleApiClient.IConnectionCallbacks,
+        GoogleApiClient.IOnConnectionFailedListener, ILocationListener
     {
+        private string _defaultUploadWebsite;
+        private bool _currentlyProcessLocation = false;
+
         public override IBinder OnBind(Intent intent)
         {
-            return null;
+            throw new NotImplementedException();
         }
 
         public void OnConnected(Bundle connectionHint)
@@ -41,21 +47,6 @@ namespace Lok
         }
 
         public void OnLocationChanged(Location location)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void OnProviderDisabled(string provider)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void OnProviderEnabled(string provider)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void OnStatusChanged(string provider, Availability status, Bundle extras)
         {
             throw new NotImplementedException();
         }
