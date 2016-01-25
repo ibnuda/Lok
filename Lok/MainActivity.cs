@@ -19,7 +19,7 @@ using static Android.Gms.Common.ConnectionResult;
 namespace Lok
 {
     [Activity(Label = "Lok", MainLauncher = true, Icon = "@drawable/icon")]
-    public class MainActivity : AppCompatActivity
+    public class MainActivity : Activity
     {
         private static readonly string Tag = "LokActivity";
 
@@ -68,7 +68,7 @@ namespace Lok
             radioButton5Menit.Click += SaveIntervalRadioButtonClick;
 
             // _trackingButton.Click += SaveuserSettings();
-            // _trackingButton += TrackLocation (this);
+            _trackingButton.Click += (sender, e) => { TrackLocation(); };
         }
 
         private void SaveIntervalRadioButtonClick(object sender, EventArgs e)
@@ -88,7 +88,7 @@ namespace Lok
             editor.Apply();
         }
 
-        private bool KosongAtauPakaiSpasi()
+        private static bool KosongAtauPakaiSpasi()
         {
             var tempUsername = _usernameEditText.Text.Trim();
             var tempUploadSite = _websiteEditText.Text.Trim();
@@ -176,7 +176,7 @@ namespace Lok
 			_alarmManager.Cancel (_pendingIntent);
 		}
 
-		private void TrackLocation(View v)
+		private void TrackLocation()
 		{
 			var prefs = this.GetSharedPreferences ("lok", 0);
 			var editor = prefs.Edit ();
