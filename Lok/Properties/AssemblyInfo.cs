@@ -29,6 +29,6 @@ using Android.App;
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
 [assembly: MetaData ("com.google.android.maps.v2.API_KEY", Value="YOUR-API-KEY")]
-[assembly: UsesPermission (Android.Manifest.Permission.FineLocation)]
-[assembly: UsesPermission (Android.Manifest.Permission.CourseLocation)]
+[assembly: UsesPermission (Android.Manifest.Permission.AccessFineLocation)]
+[assembly: UsesPermission (Android.Manifest.Permission.AccessCoarseLocation)]
 

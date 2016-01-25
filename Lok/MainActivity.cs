@@ -68,7 +68,7 @@ namespace Lok
             radioButton5Menit.Click += SaveIntervalRadioButtonClick;
 
             // _trackingButton.Click += SaveuserSettings();
-            _trackingButton += TrackLocation (this);
+            // _trackingButton += TrackLocation (this);
         }
 
         private void SaveIntervalRadioButtonClick(object sender, EventArgs e)
@@ -153,7 +153,7 @@ namespace Lok
 		{
 			Log.Debug (Tag, "StartAlarmManager");
 
-			Context context = this.BaseContext ();
+		    Context context = BaseContext;
 			_alarmManager = (AlarmManager)context.GetSystemService (Context.AlarmService);
 			_gpsIntent = new Intent (context, typeof(LokTrackerAlarmReceiver));
 			_pendingIntent = PendingIntent.GetBroadcast (context, 0, _gpsIntent, 0);
@@ -169,7 +169,7 @@ namespace Lok
 		private void CancelAlarmManager()
 		{
 			Log.Debug (Tag, "StopAlarmManager");
-			Context context = this.BaseContext ();
+		    Context context = BaseContext;
 			_gpsIntent = new Intent (context, typeof(LokTrackerAlarmReceiver));
 			_pendingIntent = PendingIntent.GetBroadcast (context, 0, _gpsIntent, 0);
 			_alarmManager = (AlarmManager)context.GetSystemService (Context.AlarmService);

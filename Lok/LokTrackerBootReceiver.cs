@@ -17,7 +17,7 @@ namespace Lok
 	public class LokTrackerBootReceiver : BroadcastReceiver
 	{
 		private static readonly string TAG = "LokTrackerBoot";
-		public void OnReceive(Context context, Intent intent)
+		public override void OnReceive(Context context, Intent intent)
 		{
 			var alarmManager = (AlarmManager)context.GetSystemService (Context.AlarmService);
 			var intentTracker = new Intent (context, typeof(LokTrackerAlarmReceiver));
