@@ -1,3 +1,7 @@
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Net.Http;
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -68,7 +72,7 @@ namespace Lok
             SendLocationDataToWebsite(location);
         }
 
-        protected void SendLocationDataToWebsite(Location location)
+        protected async void SendLocationDataToWebsite(Location location)
         {
             var dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             var date = new Date(location.Time);
@@ -76,6 +80,7 @@ namespace Lok
             var editor = prefs.Edit();
             var totalDistance = prefs.GetFloat("totalDistance", 0f);
             var firstTimePosition = prefs.GetBoolean("firstTimePosition", true);
+            var distance = 0;
             if (firstTimePosition)
                 editor.PutBoolean("firstTimePosition", false);
             else
@@ -86,7 +91,7 @@ namespace Lok
                     Longitude = prefs.GetFloat("prevLong", 0f)
                 };
 
-                var distance = location.DistanceTo(prevLocation);
+                distance = (int) location.DistanceTo(prevLocation);
                 totalDistance += distance;
                 editor.PutFloat("totalDistance", totalDistance);
             }
@@ -96,6 +101,23 @@ namespace Lok
 
             // TO DO : add parameters for post requests.
             // Hint : using HttpClient();
+            using (var client = new HttpClient())
+            {
+                var values = new Dictionary<string,string>()
+                {
+                    { "latitude", location.Latitude.ToString() },
+                    { "longitude", location.Longitude.ToString() },
+                    { "speed", location.Speed.ToString() },
+                    { "date", System.Uri.EscapeDataString(DateTime.Now.ToString()) },
+                    { "locationmethod", location.Provider },
+                    { "distance", distance.ToString() },
+                    { "username", prefs.GetString("username", "") },
+                    { "sessionid", prefs.GetString("sessionId", "") },
+                    { "accuracy", location.Accuracy.ToString() }
+                };
+                var content = new FormUrlEncodedContent(values);
+                await client.PostAsync(_defaultUploadWebsite, content);
+            }
         }
     }
 }

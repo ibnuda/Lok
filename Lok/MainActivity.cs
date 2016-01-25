@@ -57,7 +57,7 @@ namespace Lok
             {
                 var editor = prefs.Edit();
                 editor.PutBoolean("firstTime", false);
-                editor.PutString("UUID", UUID.RandomUUID().ToString());
+                editor.PutString("appId", UUID.RandomUUID().ToString());
                 editor.Apply();
             }
             // _intervalRadioGroup.CheckedChange += delegate { };
@@ -153,7 +153,7 @@ namespace Lok
 		{
 			Log.Debug (Tag, "StartAlarmManager");
 
-		    Context context = BaseContext;
+		    var context = BaseContext;
 			_alarmManager = (AlarmManager)context.GetSystemService (Context.AlarmService);
 			_gpsIntent = new Intent (context, typeof(LokTrackerAlarmReceiver));
 			_pendingIntent = PendingIntent.GetBroadcast (context, 0, _gpsIntent, 0);
@@ -169,7 +169,7 @@ namespace Lok
 		private void CancelAlarmManager()
 		{
 			Log.Debug (Tag, "StopAlarmManager");
-		    Context context = BaseContext;
+		    var context = BaseContext;
 			_gpsIntent = new Intent (context, typeof(LokTrackerAlarmReceiver));
 			_pendingIntent = PendingIntent.GetBroadcast (context, 0, _gpsIntent, 0);
 			_alarmManager = (AlarmManager)context.GetSystemService (Context.AlarmService);
@@ -190,13 +190,13 @@ namespace Lok
 				CancelAlarmManager ();
 				_currentlyTracking = false;
 				editor.PutBoolean ("currentlyTracking", false);
-				editor.PutString ("UUID", "");
+				editor.PutString ("sessionId", "");
 			} else {
 				StartAlarmManager ();
 				editor.PutBoolean ("currentlyTracking", true);
 				editor.PutFloat ("totalDistance", 0f);
 				editor.PutBoolean ("firstTimePosition", false);
-				editor.PutString ("UUID", UUID.RandomUUID ().ToString ());
+				editor.PutString ("sessionId", UUID.RandomUUID ().ToString ());
 			}
 			editor.Apply ();
 			SetTrackingButton ();

@@ -29,8 +29,8 @@ namespace Lok
 
 			if (currentlyTracking)
 				alarmManager.SetRepeating (
-					AlarmType.ElapsedRealtimeWakeup, 
-					Android.OS.SystemClock.ElapsedRealtime (), 
+					AlarmType.ElapsedRealtimeWakeup,
+                    SystemClock.ElapsedRealtime (), 
 					intervalMinute * 60000, 
 					intentPending);
 			else
