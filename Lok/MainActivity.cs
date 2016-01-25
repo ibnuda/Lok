@@ -6,6 +6,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using Android.Util;
 
 using Android.Support.V7.App;
 using Android.Views.InputMethods;
@@ -102,9 +103,7 @@ namespace Lok
         private bool CheckGooglePlayEnable()
         {
             if (IsGooglePlayServicesAvailable(this) == Success)
-            {
-                return true;
-            }
+            	return true;
             else
             {
                 Toast.MakeText(ApplicationContext, Resource.String.GooglePlayUnavailable, ToastLength.Long).Show();
@@ -148,6 +147,33 @@ namespace Lok
 
             return true;
         }
+
+		private void StartAlarmManager()
+		{
+			Log.Debug (Tag, "StartAlarmManager");
+
+			Context context = this.BaseContext ();
+			_alarmManager = (AlarmManager)context.GetSystemService (Context.AlarmService);
+			_gpsIntent = new Intent (context, typeof(LokTrackerAlarmReceiver));
+			_pendingIntent = PendingIntent.GetBroadcast (context, 0, _gpsIntent, 0);
+
+			var prefs = this.GetSharedPreferences ("Lok", 0);
+			_intervalMinute = prefs.GetInt ("intervalMenit", 1);
+			_alarmManager.SetRepeating (AlarmType.ElapsedRealtimeWakeup,
+				Android.OS.SystemClock.ElapsedRealtime (),
+				_intervalMinute * 60000,
+				_pendingIntent);
+		}
+
+		private void CancelAlarmManager()
+		{
+			Log.Debug (Tag, "StopAlarmManager");
+			Context context = this.BaseContext ();
+			_gpsIntent = new Intent (context, typeof(LokTrackerAlarmReceiver));
+			_pendingIntent = PendingIntent.GetBroadcast (context, 0, _gpsIntent, 0);
+			_alarmManager = (AlarmManager)context.GetSystemService (Context.AlarmService);
+			_alarmManager.Cancel (_pendingIntent);
+		}
     }
 }
 

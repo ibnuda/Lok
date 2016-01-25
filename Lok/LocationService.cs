@@ -10,6 +10,8 @@ using Java.Text;
 using Java.Util;
 using ILocationListener = Android.Gms.Location.ILocationListener;
 
+using ModernHttpClient;
+
 namespace Lok
 {
     public class LocationService : Service, GoogleApiClient.IConnectionCallbacks,

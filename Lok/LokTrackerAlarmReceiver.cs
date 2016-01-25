@@ -14,7 +14,7 @@ namespace Lok
         private static readonly string Tag = "LokTrackerAlarmReceiver";
         public override void OnReceive(Context context, Intent intent)
         {
-            throw new System.NotImplementedException();
+			context.StartService (new Intent (context, typeof(LocationService)));
         }
     }
 }
