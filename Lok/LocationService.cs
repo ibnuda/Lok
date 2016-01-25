@@ -72,7 +72,7 @@ namespace Lok
         {
             var dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             var date = new Date(location.Time);
-            var prefs = this.GetSharedPreferences("Lok", 0);
+            var prefs = this.GetSharedPreferences("lok", 0);
             var editor = prefs.Edit();
             var totalDistance = prefs.GetFloat("totalDistance", 0f);
             var firstTimePosition = prefs.GetBoolean("firstTimePosition", true);

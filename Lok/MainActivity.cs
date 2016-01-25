@@ -50,7 +50,7 @@ namespace Lok
             var radioButton3Menit = FindViewById<RadioButton>(Resource.Id.radioButton3Minute);
             var radioButton5Menit = FindViewById<RadioButton>(Resource.Id.radioButton5Minute);
 
-            var prefs = GetSharedPreferences("Lok", 0);
+            var prefs = GetSharedPreferences("lok", 0);
             _currentlyTracking = prefs.GetBoolean("currentlyTracking", false);
             var firstTime = prefs.GetBoolean("firstTime", true);
             if (firstTime)
@@ -68,6 +68,7 @@ namespace Lok
             radioButton5Menit.Click += SaveIntervalRadioButtonClick;
 
             // _trackingButton.Click += SaveuserSettings();
+            _trackingButton += TrackLocation (this);
         }
 
         private void SaveIntervalRadioButtonClick(object sender, EventArgs e)
@@ -75,7 +76,7 @@ namespace Lok
             var radioButton = (RadioButton) sender;
             if (_currentlyTracking)
                 Toast.MakeText(ApplicationContext, Resource.String.Hello, ToastLength.Long).Show();
-            var prefs = GetSharedPreferences("Lok", 0);
+            var prefs = GetSharedPreferences("lok", 0);
             var editor = prefs.Edit();
 
             if (radioButton.Id == Resource.Id.radioButton1Minute)
@@ -113,7 +114,7 @@ namespace Lok
 
         private void DisplayUserSettings()
         {
-            var prefs = this.GetSharedPreferences("Lok", 0);
+            var prefs = this.GetSharedPreferences("lok", 0);
             _intervalMinute = prefs.GetInt("interval", 1);
 
             if (_intervalMinute == 1)
@@ -127,7 +128,7 @@ namespace Lok
             _usernameEditText.Text = prefs.GetString("username", "");
         }
 
-        private bool SaveuserSettings()
+        private bool SaveUserSettings()
         {
             if (KosongAtauPakaiSpasi())
                 return false;
@@ -157,7 +158,7 @@ namespace Lok
 			_gpsIntent = new Intent (context, typeof(LokTrackerAlarmReceiver));
 			_pendingIntent = PendingIntent.GetBroadcast (context, 0, _gpsIntent, 0);
 
-			var prefs = this.GetSharedPreferences ("Lok", 0);
+			var prefs = this.GetSharedPreferences ("lok", 0);
 			_intervalMinute = prefs.GetInt ("intervalMenit", 1);
 			_alarmManager.SetRepeating (AlarmType.ElapsedRealtimeWakeup,
 				Android.OS.SystemClock.ElapsedRealtime (),
@@ -177,10 +178,10 @@ namespace Lok
 
 		private void TrackLocation(View v)
 		{
-			var prefs = this.GetSharedPreferences ("Lok", 0);
+			var prefs = this.GetSharedPreferences ("lok", 0);
 			var editor = prefs.Edit ();
 
-			if (!SaveuserSettings ())
+			if (!SaveUserSettings ())
 				return;
 			if (!CheckGooglePlayEnable ())
 				return;
@@ -211,6 +212,19 @@ namespace Lok
 				_trackingButton.SetText (Resource.String.TrackingOff);
 			}
 		}
+
+        protected override void OnResume()
+        {
+            Log.Debug (Tag, "OnResume");
+            base.OnResume ();
+            DisplayUserSettings ();
+            SetTrackingButton ();
+        }
+
+        protected override void OnStop()
+        {
+            base.OnStop ();
+        }
     }
 }
 

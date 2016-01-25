@@ -23,7 +23,7 @@ namespace Lok
 			var intentTracker = new Intent (context, typeof(LokTrackerAlarmReceiver));
 			var intentPending = PendingIntent.GetBroadcast (context, 0, intentTracker, 0);
 
-			var prefs = context.GetSharedPreferences ("Lok", 0);
+			var prefs = context.GetSharedPreferences ("lok", 0);
 			var intervalMinute = prefs.GetInt ("interval", 1);
 			var currentlyTracking = prefs.GetBoolean ("currentlyTracking", false);
 
