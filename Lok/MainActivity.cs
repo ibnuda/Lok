@@ -174,6 +174,43 @@ namespace Lok
 			_alarmManager = (AlarmManager)context.GetSystemService (Context.AlarmService);
 			_alarmManager.Cancel (_pendingIntent);
 		}
+
+		private void TrackLocation(View v)
+		{
+			var prefs = this.GetSharedPreferences ("Lok", 0);
+			var editor = prefs.Edit ();
+
+			if (!SaveuserSettings ())
+				return;
+			if (!CheckGooglePlayEnable ())
+				return;
+
+			if (_currentlyTracking) {
+				CancelAlarmManager ();
+				_currentlyTracking = false;
+				editor.PutBoolean ("currentlyTracking", false);
+				editor.PutString ("UUID", "");
+			} else {
+				StartAlarmManager ();
+				editor.PutBoolean ("currentlyTracking", true);
+				editor.PutFloat ("totalDistance", 0f);
+				editor.PutBoolean ("firstTimePosition", false);
+				editor.PutString ("UUID", UUID.RandomUUID ().ToString ());
+			}
+			editor.Apply ();
+			SetTrackingButton ();
+		}
+
+		private void SetTrackingButton()
+		{
+			if (_currentlyTracking) {
+				_trackingButton.SetTextColor (Android.Graphics.Color.Pink);
+				_trackingButton.SetText (Resource.String.TrackingOn);
+			} else {
+				_trackingButton.SetTextColor (Android.Graphics.Color.Azure);
+				_trackingButton.SetText (Resource.String.TrackingOff);
+			}
+		}
     }
 }
 
