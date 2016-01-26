@@ -14,8 +14,7 @@ using Android.Widget;
 namespace Lok
 {
     [Activity (Label = "LokTrackerBoot")]
-    public class LokTrackerBootReceiver : BroadcastReceiver
-    {
+	public class LokTrackerBootReceiver : BroadcastReceiver{
         private static readonly string TAG = "LokTrackerBoot";
         public override void OnReceive(Context context, Intent intent)
         {
