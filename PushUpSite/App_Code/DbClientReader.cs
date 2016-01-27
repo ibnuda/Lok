@@ -38,8 +38,8 @@ public class DbClientReader
             command.CommandType = CommandType.StoredProcedure;
 
             if (parameterList.Length > 0)
-                for (int i = 0; i < parameterList.Length; i++)
-                    command.Parameters.Add (parameterList[i]);
+                foreach (var item in parameterList)
+                    command.Parameters.Add (item);
 
             connection.Open ();
             dataReader = command.ExecuteReader ();
@@ -50,10 +50,7 @@ public class DbClientReader
 
             if (dataReader.HasRows)
                 while (dataReader.Read ())
-                {
-                    stringBuilder.Append (dataReader.GetString (0));
-                    stringBuilder.Append (",");
-                }
+                    stringBuilder.Append (dataReader.GetString (0)).Append (",");
             if (stringBuilder.ToString ().EndsWith (","))
                 stringBuilder = stringBuilder.Remove (stringBuilder.Length - 1, 1);
         }

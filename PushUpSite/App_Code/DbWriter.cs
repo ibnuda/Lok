@@ -29,8 +29,8 @@ public class DbWriter
             command.CommandType = CommandType.StoredProcedure;
 
             if (parameterList.Length > 0)
-                for (var i = 0; i < parameterList.Length; i++)
-                    command.Parameters.Add (parameterList[i]);
+                foreach (var item in parameterList)
+                    command.Parameters.Add (item);
 
             connection.Open ();
             dataReader = command.ExecuteReader ();
