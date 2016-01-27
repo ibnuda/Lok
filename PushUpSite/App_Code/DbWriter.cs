@@ -12,7 +12,7 @@ public class DbWriter
     {
     }
 
-    public string UpdateDB(string prosedur, params SqlParameter[] parameterList)
+    public string UpdateDB ( string prosedur, params SqlParameter[] parameterList )
     {
         string returnValue = "0";
         SqlDataReader dataReader = null;
@@ -54,7 +54,7 @@ public class DbWriter
         return returnValue;
     }
 
-    private string GetConnectionString()
+    private string GetConnectionString ()
     {
         return ConfigurationManager.ConnectionStrings["MySqlDataConnection"].ConnectionString;
     }

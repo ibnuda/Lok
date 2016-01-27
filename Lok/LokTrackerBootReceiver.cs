@@ -14,12 +14,13 @@ using Android.Widget;
 namespace Lok
 {
     [Activity (Label = "LokTrackerBoot")]
-	public class LokTrackerBootReceiver : BroadcastReceiver{
+    public class LokTrackerBootReceiver: BroadcastReceiver
+    {
         private static readonly string TAG = "LokTrackerBoot";
-        public override void OnReceive(Context context, Intent intent)
+        public override void OnReceive ( Context context, Intent intent )
         {
-            var alarmManager = (AlarmManager)context.GetSystemService (Context.AlarmService);
-            var intentTracker = new Intent (context, typeof(LokTrackerAlarmReceiver));
+            var alarmManager = (AlarmManager) context.GetSystemService (Context.AlarmService);
+            var intentTracker = new Intent (context, typeof (LokTrackerAlarmReceiver));
             var intentPending = PendingIntent.GetBroadcast (context, 0, intentTracker, 0);
 
             var prefs = context.GetSharedPreferences ("lok", 0);

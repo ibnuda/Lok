@@ -14,7 +14,7 @@ public class DbClientReader
     }
 
     // TODO: Create method to read data and parameters from android clients.
-    public string WusDat (string prosedur, params SqlParameter[] parameterList)
+    public string WusDat ( string prosedur, params SqlParameter[] parameterList )
     {
         var returnValue = "Wus Dat?!";
         // Ingatkan saya nulis dimari.

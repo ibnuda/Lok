@@ -9,12 +9,12 @@ using Android.Support.V4.Content;
 
 namespace Lok
 {
-    public class LokTrackerAlarmReceiver : WakefulBroadcastReceiver
+    public class LokTrackerAlarmReceiver: WakefulBroadcastReceiver
     {
         private static readonly string Tag = "LokTrackerAlarmReceiver";
-        public override void OnReceive(Context context, Intent intent)
+        public override void OnReceive ( Context context, Intent intent )
         {
-			context.StartService (new Intent (context, typeof(LocationService)));
+            context.StartService (new Intent (context, typeof (LocationService)));
         }
     }
 }
